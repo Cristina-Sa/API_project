@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Carga de un fichero de video</title>
+    <link rel='stylesheet' type='text/css' href='style.css'>
+</head>
+
+<body>
+    <h1>Carga de video</h1>
+    <div>
+        <input type="file" id="files" name="files[]" accept="video/webm, video/ogg, video/mp4, video/3pg" multiple
+            onchange="handleFileSelect(event)" />
+        <output id="list"></output>
+    </div>
+
+    <figure id="videoFramework">
+        <video id="myVideo" controls autoplay width="620">
+        </video>
+        <div>
+            <button onclick="document.getElementById('myVideo').play();">Reproducir</button>
+            <button onclick="document.getElementById('myVideo').pause();">Pausa</button>
+            <button onclick="subirVolumen();">Subir Volumen</button>
+            <button onclick="bajarVolumen();">Bajar Volumen</button>
+        </div>
+    </figure>
+
+    <script src="functions.js" type="text/javascript"></script>
+
+</body>
+
+</html>

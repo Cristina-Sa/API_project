@@ -1,85 +1,80 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="utf-8">
-    
-        <title>Carga de un fichero de video</title>
-    
-        <style>
-            #videoFramework {
-                display: none;
-            }
-        </style>
-            
-        <script>
-            if(window.File && window.FileReader && window.FileList){
-                    console.log('Todas las APIs soportadas')
-                }else{
-                    alert('La API de FILE no es soportada en este navegador')
-                }
+<head>
+    <meta charset="utf-8">
 
-            function handleFileSelect(evt) {
-                var videoFramework = document.getElementById('videoFramework');
-                var file = evt.target.files[0]; 
-                var output = [];
-                if (file.type.match('video/*')) {
-                    alert("Cargando el video")
-                    // for(var i = 0, f; f = files[i]; i++) {   
-                    var video = document.getElementById('myVideo');  
-                    var obj_url = window.URL.createObjectURL(file);
-                    video.src = obj_url;  
-                    console.log(video)
-                    console.log(video.src)
-                    videoFramework.style.display = 'block';
+    <title>Carga de un fichero de video</title>
 
-                    // reader.readAsDataURL(file); 
-                    // }
-                } else {
-                    alert("Error en el fichero seleccionado: debe elegir un archivo con un formato de vídeo válido.");
-                    output.innerHTML = "Error de formato.";
-                }  
-            }
-            
-            function subirVolumen() {
+    <style>
+        #videoFramework {
+            display: none;
+        }
+    </style>
+
+    <script>
+        if (window.File && window.FileReader && window.FileList) {
+            console.log('Todas las APIs soportadas')
+        } else {
+            alert('La API de FILE no es soportada en este navegador')
+        }
+
+        function handleFileSelect(evt) {
+            var videoFramework = document.getElementById('videoFramework');
+            var file = evt.target.files[0];
+            var output = [];
+            if (file.type.match('video/*')) {
+                alert("Cargando el video")
                 var video = document.getElementById('myVideo');
-
-                if (video.volume <= 0.9){
-                    video.volume += 0.1
-                };
+                var obj_url = window.URL.createObjectURL(file);
+                video.src = obj_url;
+                console.log(video)
+                console.log(video.src)
+                videoFramework.style.display = 'block';
+            } else {
+                alert("Error en el fichero seleccionado: debe elegir un archivo con un formato de vídeo válido.");
+                output.innerHTML = "Error de formato.";
             }
+        }
 
-            function bajarVolumen() {
-                var video = document.getElementById('myVideo');
+        function subirVolumen() {
+            var video = document.getElementById('myVideo');
 
-                if (video.volume >= 0.1){
-                    video.volume -= 0.1
-                };
-            }
+            if (video.volume <= 0.9) {
+                video.volume += 0.1
+            };
+        }
 
-            // document.getElementById('files').addEventListener('change', handleFileSelect, false);
-        </script>
-    </head>
-    
-    <body>
-        <h3>Carga de video</h3>
+        function bajarVolumen() {
+            var video = document.getElementById('myVideo');
+
+            if (video.volume >= 0.1) {
+                video.volume -= 0.1
+            };
+        }
+    </script>
+</head>
+
+<body>
+    <h3>Carga de video</h3>
+    <div>
+        <input type="file" id="files" name="files[]" accept="video/webm, video/ogg, video/mp4, video/3pg" multiple
+            onchange="handleFileSelect(event)" />
+        <output id="list"></output>
+    </div>
+
+    <figure id="videoFramework">
+        <video id="myVideo" controls autoplay width="620">
+        </video>
         <div>
-            <input type="file" id="files" name="files[]" accept="video/webm, video/ogg, video/mp4, video/3pg" multiple onchange="handleFileSelect(event)" />
-            <output id="list"></output>
+            <button onclick="document.getElementById('myVideo').play();">Reproducir</button>
+            <button onclick="document.getElementById('myVideo').pause();">Pausa</button>
+            <button onclick="subirVolumen();">Subir Volumen</button>
+            <button onclick="bajarVolumen();">Bajar Volumen</button>
         </div>
-
-        <figure id="videoFramework">
-            <video id="myVideo" controls autoplay width="620">
-            </video>
-            <div>
-                <button onclick="document.getElementById('myVideo').play();">Reproducir</button>
-                <button onclick="document.getElementById('myVideo').pause();">Pausa</button>
-                <button onclick="subirVolumen();">Subir Volumen</button>
-                <button onclick="bajarVolumen();">Bajar Volumen</button>
-            </div>
-        </figure>
+    </figure>
 
 
-    </body>
+</body>
 
 </html>
